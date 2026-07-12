@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>間 - ひと呼吸のタイマー</title>
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACjUlEQVR4nM2XTUwTURSFv+k0oUQKbSjdCaIgbBBrIiVRE5oI4kYTo9QoRMWlJmo0iH/RhUYUw0JDXKlNCcY9bogNCy1sZAcEKGob3A6TsoAw6TS4aDqhP/aPtnB277777jlz7sy89wSSwGKxbCaLbxeSJAnxsZhAoYhTCdEVmzyeS1ds8ngRunSJhYawE0+/FWkdqK3dh9VaFbtIp8PhaNPG9fV1CetstsPY7S1pBejTJbS22nn29AkezwSBQACAhoaDOBxtjI9/437/Q0bcLmRZ5vsPL2FVRRAEnM4ujMYy3r4bZnj4PZubyY1OKwBAr9djNpu4cXMIgK4L53E42jAay1hfX9dE3b3Xx/z8AgCdnacwmSoA/ksO23wJZVkmHA6nzPH7AynnM3IAoLp6L/39fQA0NjYkzbneexVpRQbAbDZlVDdjAcvLfxkYeA1EWnDi+LGEnA8fXVoLOtpPUl5enj8Bu86BVnsLv//4tfmlpV8MvBpEklaAAjgQRWVlJT+np2k6dIRQKARAe8dpmpubMBgM2ZbLXkDdgf2MjLjweCbw+yMOiHo9Pd2X2NhQuHX7Dl7vVOEEAIiiiMlUweCbIS3We+0KBoNBa0GmyPtmJElSVvk5OQCxXwVE9odckLOArV8FRFogimLWdXb8PJCzAzU11Tx+9EAbx7dASDh+5lnAzMwsz1+81MbOi13Mzc7R030ZRVGoqrICoKqh/ApY9Pk4c/YcCwuLMXGb7SiqqlJSUsLoqJvS0shPadu74draGpOTU3xyuQEIBlcJBlcT8lRVBUBRFMbGvmIs28Po5y/4fEsp6+/+M2HBBSS7LhULkiQJO+9AVEmxiaOcuvhAMckh7nYcRTGv5/8A9sbinFbTIqgAAAAASUVORK5CYII=">
+<link rel="icon" type="image/png" sizes="512x512" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="間">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#F1F0EC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=IBM+Plex+Sans+JP:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F1F0EC;
+    --panel: #FFFFFF;
+    --panel-line: rgba(20,20,20,0.10);
+    --ink: #141414;
+    --ink-mid: #4A4844;
+    --ink-soft: rgba(20,20,20,0.14);
+    --ink-shadow: rgba(20,20,20,0.20);
+    --text: #141414;
+    --text-muted: #6E6B66;
+    --text-faint: #A19D97;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans JP', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 32px 20px 60px;
+    background: var(--bg);
+  }
+
+  .app {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    text-align: center;
+    padding-top: 8px;
+  }
+
+  .mark {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .mark .dot {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    transition: opacity 0.6s ease;
+  }
+
+  .mark.achieved .dot { opacity: 0.55; }
+
+  .tagline {
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------- Tabs ---------- */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    background: rgba(20,20,20,0.06);
+    padding: 4px;
+    border-radius: 12px;
+  }
+
+  .tab-btn {
+    flex: 1;
+    appearance: none;
+    border: none;
+    background: transparent;
+    padding: 10px 0;
+    border-radius: 9px;
+    font-family: 'IBM Plex Sans JP', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  .tab-btn.active {
+    background: var(--panel);
+    color: var(--text);
+    box-shadow: 0 2px 8px rgba(20,20,20,0.10);
+  }
+
+  .view { display: none; flex-direction: column; gap: 22px; }
+  .view.active { display: flex; }
+
+  /* ---------- Ring ---------- */
+  .ring-wrap {
+    position: relative;
+    width: 264px;
+    height: 264px;
+    margin: 0 auto;
+  }
+
+  .ring-wrap svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+
+  .ring-track {
+    fill: none;
+    stroke: rgba(20,20,20,0.10);
+    stroke-width: 7;
+  }
+
+  .ring-progress {
+    fill: none;
+    stroke: var(--ink-mid);
+    stroke-width: 7;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.6s cubic-bezier(0.4,0,0.2,1), stroke 0.6s ease;
+  }
+
+  .ring-progress.achieved { stroke: var(--ink); }
+
+  .ring-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 6px;
+  }
+
+  .elapsed {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  .elapsed-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .status-msg {
+    margin-top: 8px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    max-width: 170px;
+    line-height: 1.5;
+  }
+
+  .status-msg.achieved { color: var(--ink); }
+
+  /* ---------- Record button ---------- */
+  .record-btn {
+    appearance: none;
+    border: none;
+    width: 100%;
+    padding: 18px;
+    border-radius: 16px;
+    background: var(--ink);
+    color: var(--bg);
+    font-family: 'IBM Plex Sans JP', sans-serif;
+    font-size: 15.5px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: transform 0.12s ease, background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 24px -10px var(--ink-shadow);
+  }
+
+  .record-btn:active { transform: scale(0.97); }
+
+  .craving-btn {
+    appearance: none;
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    border-radius: 16px;
+    background: transparent;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans JP', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: transform 0.12s ease, background 0.25s ease, color 0.25s ease;
+  }
+
+  .craving-btn:active { transform: scale(0.97); }
+  .craving-btn:hover { background: var(--ink); color: var(--bg); }
+
+  .sub-actions {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  .undo-link {
+    background: none;
+    border: none;
+    color: var(--text-faint);
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    padding: 6px 10px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(163,143,114,0.5);
+  }
+
+  .undo-link:hover { color: var(--text-muted); }
+
+  /* ---------- Panels ---------- */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: 18px;
+    padding: 18px 20px 14px;
+  }
+
+  .panel-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .panel-title {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .panel-count {
+    font-family: 'IBM Plex Mono', sans-serif;
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+
+  .panel-count b {
+    color: var(--text);
+    font-size: 15px;
+  }
+
+  .log-list {
+    list-style: none;
+    max-height: 220px;
+    overflow-y: auto;
+  }
+
+  .log-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--panel-line);
+    font-size: 13.5px;
+  }
+
+  .log-row:last-child { border-bottom: none; }
+
+  .log-time {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+
+  .log-gap {
+    color: var(--text-faint);
+    font-size: 12px;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 22px 8px 18px;
+    color: var(--text-faint);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* ---------- Range toggle (data view) ---------- */
+  .range-toggle {
+    display: flex;
+    gap: 6px;
+  }
+
+  .range-btn {
+    appearance: none;
+    border: 1px solid rgba(20,20,20,0.16);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .range-btn.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
+  }
+
+  /* ---------- Bar chart ---------- */
+  .bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 120px;
+    padding-top: 6px;
+  }
+
+  .bar-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    gap: 6px;
+  }
+
+  .bar-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-faint);
+  }
+
+  .bar-fill {
+    width: 100%;
+    max-width: 22px;
+    background: var(--ink);
+    border-radius: 5px 5px 3px 3px;
+    min-height: 3px;
+    transition: height 0.5s ease;
+  }
+
+  .bar-label {
+    font-size: 10px;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+
+  /* ---------- Hour histogram ---------- */
+  .hist-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+  }
+
+  .hist-label {
+    width: 44px;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .hist-track {
+    flex: 1;
+    height: 10px;
+    background: rgba(20,20,20,0.08);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .hist-fill {
+    height: 100%;
+    background: var(--ink);
+    border-radius: 999px;
+    transition: width 0.5s ease;
+  }
+
+  .hist-value {
+    width: 20px;
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+
+  /* ---------- Weekly timeline ---------- */
+  .timeline-day {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--panel-line);
+  }
+
+  .timeline-day:last-child { border-bottom: none; }
+
+  .timeline-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .timeline-head b { color: var(--text); font-family: 'IBM Plex Mono', monospace; }
+
+  .timeline-track {
+    position: relative;
+    height: 14px;
+    background: rgba(20,20,20,0.07);
+    border-radius: 999px;
+    margin-bottom: 6px;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ink);
+    transform: translate(-50%, -50%);
+    border: 1.5px solid var(--panel);
+  }
+
+  .timeline-times {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-faint);
+    line-height: 1.6;
+  }
+
+  .empty-state.small { padding: 12px 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ring-progress, .record-btn, .mark .dot, .bar-fill, .hist-fill { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <header>
+    <div class="mark" id="mark">間<span class="dot" id="markDot">-ma-</span></div>
+    <div class="tagline">次の一服までの、ひと呼吸。</div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-view="record">記録</button>
+    <button class="tab-btn" data-view="data">データ</button>
+  </nav>
+
+  <!-- ============ 記録タブ ============ -->
+  <section class="view active" id="view-record">
+
+    <div class="ring-wrap">
+      <svg viewBox="0 0 200 200">
+        <circle class="ring-track" cx="100" cy="100" r="88"></circle>
+        <circle class="ring-progress" id="ringProgress" cx="100" cy="100" r="88"
+          stroke-dasharray="553" stroke-dashoffset="553"></circle>
+      </svg>
+      <div class="ring-center">
+        <div class="elapsed" id="elapsedText">--:--</div>
+        <div class="elapsed-label" id="elapsedLabel">記録なし</div>
+        <div class="status-msg" id="statusMsg">下のボタンで最初の記録をつけましょう</div>
+      </div>
+    </div>
+
+    <div>
+      <button class="record-btn" id="recordBtn">吸った時刻を記録する</button>
+      <button class="craving-btn" id="cravingBtn">吸いたくなった(我慢する)</button>
+      <div class="sub-actions">
+        <button class="undo-link" id="undoBtn" style="display:none;">直前の記録を取り消す</button>
+        <button class="undo-link" id="undoCravingBtn" style="display:none;">直前の欲求を取り消す</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">今日の記録</div>
+        <div class="panel-count"><b id="todayCount">0</b> 回 ・ 欲求 <b id="todayCravingCount">0</b> 回</div>
+      </div>
+      <ul class="log-list" id="logList"></ul>
+      <div class="empty-state" id="emptyState">まだ今日の記録はありません</div>
+    </div>
+
+  </section>
+
+  <!-- ============ データタブ ============ -->
+  <section class="view" id="view-data">
+
+    <div class="range-toggle">
+      <button class="range-btn active" data-range="7">過去1週間</button>
+      <button class="range-btn" data-range="30">過去1ヶ月</button>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">本数の推移</div>
+        <div class="panel-count"><b id="rangeTotal">0</b> 本合計</div>
+      </div>
+      <div class="bar-chart" id="barChart"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">よく吸う時間帯</div>
+      </div>
+      <div id="histChart"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">欲求が来るタイミング</div>
+        <div class="panel-count">平均 <b id="cravingAvg">--</b> 分後</div>
+      </div>
+      <div id="cravingHistChart"></div>
+      <div class="empty-state small" id="cravingEmpty" style="display:none;">この期間の欲求記録はありません</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">過去7日間の時刻</div>
+      </div>
+      <div id="weekTimeline"></div>
+      <div class="empty-state small" id="weekEmpty" style="display:none;">この期間の記録はありません</div>
+    </div>
+
+  </section>
+
+</div>
+
+<script>
+  const STORAGE_KEY = 'ma-smoke-log-v1';
+  const CRAVING_STORAGE_KEY = 'ma-craving-log-v1';
+  const GOAL_MS = 60 * 60 * 1000;        // 60分目標
+  const RETENTION_DAYS = 30;             // データ保持期間
+  const RING_CIRCUMFERENCE = 2 * Math.PI * 88;
+
+  const el = {
+    mark: document.getElementById('mark'),
+    ring: document.getElementById('ringProgress'),
+    elapsedText: document.getElementById('elapsedText'),
+    elapsedLabel: document.getElementById('elapsedLabel'),
+    statusMsg: document.getElementById('statusMsg'),
+    recordBtn: document.getElementById('recordBtn'),
+    undoBtn: document.getElementById('undoBtn'),
+    cravingBtn: document.getElementById('cravingBtn'),
+    undoCravingBtn: document.getElementById('undoCravingBtn'),
+    todayCount: document.getElementById('todayCount'),
+    todayCravingCount: document.getElementById('todayCravingCount'),
+    logList: document.getElementById('logList'),
+    emptyState: document.getElementById('emptyState'),
+    tabs: document.querySelectorAll('.tab-btn'),
+    views: document.querySelectorAll('.view'),
+    rangeBtns: document.querySelectorAll('.range-btn'),
+    rangeTotal: document.getElementById('rangeTotal'),
+    barChart: document.getElementById('barChart'),
+    histChart: document.getElementById('histChart'),
+    cravingHistChart: document.getElementById('cravingHistChart'),
+    cravingAvg: document.getElementById('cravingAvg'),
+    cravingEmpty: document.getElementById('cravingEmpty'),
+    weekTimeline: document.getElementById('weekTimeline'),
+    weekEmpty: document.getElementById('weekEmpty'),
+  };
+
+  el.ring.style.strokeDasharray = RING_CIRCUMFERENCE;
+
+  let chartRangeDays = 7;
+
+  function loadLog() {
+    let data = [];
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      data = raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      data = [];
+    }
+    const cutoff = Date.now() - RETENTION_DAYS * 24 * 60 * 60 * 1000;
+    const pruned = data.filter(ts => ts >= cutoff);
+    if (pruned.length !== data.length) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(pruned));
+    }
+    return pruned;
+  }
+
+  function saveLog(log) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(log));
+  }
+
+  function loadCravingLog() {
+    let data = [];
+    try {
+      const raw = localStorage.getItem(CRAVING_STORAGE_KEY);
+      data = raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      data = [];
+    }
+    const cutoff = Date.now() - RETENTION_DAYS * 24 * 60 * 60 * 1000;
+    const pruned = data.filter(c => c.ts >= cutoff);
+    if (pruned.length !== data.length) {
+      localStorage.setItem(CRAVING_STORAGE_KEY, JSON.stringify(pruned));
+    }
+    return pruned;
+  }
+
+  function saveCravingLog(cravingLog) {
+    localStorage.setItem(CRAVING_STORAGE_KEY, JSON.stringify(cravingLog));
+  }
+
+  let log = loadLog();
+  let cravingLog = loadCravingLog();
+
+  function isSameDay(ts, ref) {
+    const a = new Date(ts), b = new Date(ref);
+    return a.getFullYear() === b.getFullYear() &&
+           a.getMonth() === b.getMonth() &&
+           a.getDate() === b.getDate();
+  }
+
+  function dayKey(ts) {
+    const d = new Date(ts);
+    return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+  }
+
+  function formatClock(ts) {
+    const d = new Date(ts);
+    return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+  }
+
+  function formatShortDate(ts) {
+    const d = new Date(ts);
+    return `${d.getMonth() + 1}/${d.getDate()}`;
+  }
+
+  function formatWeekday(ts) {
+    return ['日','月','火','水','木','金','土'][new Date(ts).getDay()];
+  }
+
+  function formatElapsed(ms) {
+    const totalSec = Math.max(0, Math.floor(ms / 1000));
+    const h = Math.floor(totalSec / 3600);
+    const m = Math.floor((totalSec % 3600) / 60);
+    const s = totalSec % 60;
+    if (h > 0) {
+      return `${h}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+    }
+    return `${m}:${s.toString().padStart(2,'0')}`;
+  }
+
+  function statusFor(ms) {
+    const min = ms / 60000;
+    if (min >= 60) return { msg: '60分達成。よくがんばりました 🎉', achieved: true };
+    if (min >= 45) return { msg: 'あと少し。ここが一番の踏ん張りどころ', achieved: false };
+    if (min >= 15) return { msg: '順調です。このまま伸ばしていきましょう', achieved: false };
+    return { msg: 'まずはここから。深呼吸してみましょう', achieved: false };
+  }
+
+  // ---------- 記録タブ ----------
+
+  function renderHistory() {
+    const today = log.filter(ts => isSameDay(ts, Date.now())).sort((a,b) => b - a);
+    el.todayCount.textContent = today.length;
+
+    const todayCravings = cravingLog.filter(c => isSameDay(c.ts, Date.now()));
+    el.todayCravingCount.textContent = todayCravings.length;
+
+    if (today.length === 0) {
+      el.logList.innerHTML = '';
+      el.emptyState.style.display = 'block';
+      return;
+    }
+    el.emptyState.style.display = 'none';
+
+    el.logList.innerHTML = today.map((ts, i) => {
+      const prev = today[i + 1];
+      const gapLabel = prev ? `前回から ${formatElapsed(ts - prev)}` : '本日最初';
+      return `<li class="log-row">
+        <span class="log-time">${formatClock(ts)}</span>
+        <span class="log-gap">${gapLabel}</span>
+      </li>`;
+    }).join('');
+  }
+
+  function tick() {
+    if (log.length === 0) {
+      el.elapsedText.textContent = '--:--';
+      el.elapsedLabel.textContent = '記録なし';
+      el.statusMsg.textContent = '下のボタンで最初の記録をつけましょう';
+      el.statusMsg.classList.remove('achieved');
+      el.mark.classList.remove('achieved');
+      el.ring.classList.remove('achieved');
+      el.ring.style.strokeDashoffset = RING_CIRCUMFERENCE;
+      return;
+    }
+
+    const last = log[log.length - 1];
+    const elapsedMs = Date.now() - last;
+    const progress = Math.min(elapsedMs / GOAL_MS, 1);
+    const offset = RING_CIRCUMFERENCE * (1 - progress);
+    el.ring.style.strokeDashoffset = offset;
+
+    el.elapsedText.textContent = formatElapsed(elapsedMs);
+    el.elapsedLabel.textContent = elapsedMs >= GOAL_MS ? '目標達成後の経過' : '経過時間';
+
+    const status = statusFor(elapsedMs);
+    el.statusMsg.textContent = status.msg;
+    el.statusMsg.classList.toggle('achieved', status.achieved);
+    el.mark.classList.toggle('achieved', status.achieved);
+    el.ring.classList.toggle('achieved', status.achieved);
+  }
+
+  // ---------- データタブ ----------
+
+  function renderBarChart() {
+    const days = [];
+    for (let i = chartRangeDays - 1; i >= 0; i--) {
+      days.push(Date.now() - i * 24 * 60 * 60 * 1000);
+    }
+    const counts = days.map(ts => log.filter(l => isSameDay(l, ts)).length);
+    const max = Math.max(1, ...counts);
+    const total = counts.reduce((a,b) => a+b, 0);
+    el.rangeTotal.textContent = total;
+
+    const showEveryLabel = chartRangeDays <= 7;
+    el.barChart.innerHTML = days.map((ts, i) => {
+      const h = Math.round((counts[i] / max) * 84) + 4;
+      const label = showEveryLabel ? formatWeekday(ts) : (i % 5 === 0 ? formatShortDate(ts) : '');
+      return `<div class="bar-col">
+        <div class="bar-value">${counts[i] > 0 ? counts[i] : ''}</div>
+        <div class="bar-fill" style="height:${h}px;"></div>
+        <div class="bar-label">${label}</div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderHistChart() {
+    const cutoff = Date.now() - chartRangeDays * 24 * 60 * 60 * 1000;
+    const inRange = log.filter(ts => ts >= cutoff);
+    const buckets = [
+      { label: '深夜', from: 0, to: 4 },
+      { label: '早朝', from: 4, to: 8 },
+      { label: '午前', from: 8, to: 12 },
+      { label: '午後', from: 12, to: 16 },
+      { label: '夕方', from: 16, to: 20 },
+      { label: '夜', from: 20, to: 24 },
+    ];
+    const counts = buckets.map(b => inRange.filter(ts => {
+      const h = new Date(ts).getHours();
+      return h >= b.from && h < b.to;
+    }).length);
+    const max = Math.max(1, ...counts);
+
+    el.histChart.innerHTML = buckets.map((b, i) => {
+      const pct = Math.round((counts[i] / max) * 100);
+      return `<div class="hist-row">
+        <div class="hist-label">${b.label}</div>
+        <div class="hist-track"><div class="hist-fill" style="width:${pct}%;"></div></div>
+        <div class="hist-value">${counts[i]}</div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderCravingHistChart() {
+    const cutoff = Date.now() - chartRangeDays * 24 * 60 * 60 * 1000;
+    const inRange = cravingLog.filter(c => c.ts >= cutoff && c.elapsed !== null && c.elapsed !== undefined);
+
+    if (inRange.length === 0) {
+      el.cravingHistChart.innerHTML = '';
+      el.cravingEmpty.style.display = 'block';
+      el.cravingAvg.textContent = '--';
+      return;
+    }
+    el.cravingEmpty.style.display = 'none';
+
+    const avgMin = Math.round(inRange.reduce((a, c) => a + c.elapsed, 0) / inRange.length / 60000);
+    el.cravingAvg.textContent = avgMin;
+
+    const buckets = [
+      { label: '0-10分', from: 0, to: 10 },
+      { label: '10-20分', from: 10, to: 20 },
+      { label: '20-30分', from: 20, to: 30 },
+      { label: '30-40分', from: 30, to: 40 },
+      { label: '40-50分', from: 40, to: 50 },
+      { label: '50-60分', from: 50, to: 60 },
+      { label: '60分〜', from: 60, to: Infinity },
+    ];
+    const counts = buckets.map(b => inRange.filter(c => {
+      const min = c.elapsed / 60000;
+      return min >= b.from && min < b.to;
+    }).length);
+    const max = Math.max(1, ...counts);
+
+    el.cravingHistChart.innerHTML = buckets.map((b, i) => {
+      const pct = Math.round((counts[i] / max) * 100);
+      return `<div class="hist-row">
+        <div class="hist-label">${b.label}</div>
+        <div class="hist-track"><div class="hist-fill" style="width:${pct}%;"></div></div>
+        <div class="hist-value">${counts[i]}</div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderWeekTimeline() {
+    const days = [];
+    for (let i = 0; i < 7; i++) {
+      days.push(Date.now() - i * 24 * 60 * 60 * 1000);
+    }
+    const rows = days.map(dayTs => {
+      const entries = log.filter(ts => isSameDay(ts, dayTs)).sort((a,b) => a - b);
+      if (entries.length === 0) return null;
+      const dots = entries.map(ts => {
+        const d = new Date(ts);
+        const pct = ((d.getHours() * 60 + d.getMinutes()) / (24 * 60)) * 100;
+        return `<div class="timeline-dot" style="left:${pct}%;"></div>`;
+      }).join('');
+      const times = entries.map(formatClock).join('  ');
+      return `<div class="timeline-day">
+        <div class="timeline-head">
+          <span>${formatShortDate(dayTs)}(${formatWeekday(dayTs)})</span>
+          <span><b>${entries.length}</b> 回</span>
+        </div>
+        <div class="timeline-track">${dots}</div>
+        <div class="timeline-times">${times}</div>
+      </div>`;
+    }).filter(Boolean);
+
+    if (rows.length === 0) {
+      el.weekTimeline.innerHTML = '';
+      el.weekEmpty.style.display = 'block';
+    } else {
+      el.weekEmpty.style.display = 'none';
+      el.weekTimeline.innerHTML = rows.join('');
+    }
+  }
+
+  function renderDataView() {
+    renderBarChart();
+    renderHistChart();
+    renderCravingHistChart();
+    renderWeekTimeline();
+  }
+
+  // ---------- 共通 ----------
+
+  function render() {
+    tick();
+    renderHistory();
+    renderDataView();
+    el.undoBtn.style.display = log.length > 0 ? 'inline-block' : 'none';
+    el.undoCravingBtn.style.display = cravingLog.length > 0 ? 'inline-block' : 'none';
+  }
+
+  el.recordBtn.addEventListener('click', () => {
+    log.push(Date.now());
+    saveLog(log);
+    render();
+  });
+
+  el.undoBtn.addEventListener('click', () => {
+    if (log.length === 0) return;
+    log.pop();
+    saveLog(log);
+    render();
+  });
+
+  el.cravingBtn.addEventListener('click', () => {
+    const now = Date.now();
+    const elapsed = log.length > 0 ? now - log[log.length - 1] : null;
+    cravingLog.push({ ts: now, elapsed });
+    saveCravingLog(cravingLog);
+    render();
+  });
+
+  el.undoCravingBtn.addEventListener('click', () => {
+    if (cravingLog.length === 0) return;
+    cravingLog.pop();
+    saveCravingLog(cravingLog);
+    render();
+  });
+
+  el.tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      el.tabs.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const target = btn.dataset.view;
+      el.views.forEach(v => v.classList.toggle('active', v.id === `view-${target}`));
+      if (target === 'data') renderDataView();
+    });
+  });
+
+  el.rangeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      el.rangeBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      chartRangeDays = parseInt(btn.dataset.range, 10);
+      renderBarChart();
+      renderHistChart();
+      renderCravingHistChart();
+    });
+  });
+
+  setInterval(tick, 1000);
+  render();
+</script>
+
+</body>
+</html>
