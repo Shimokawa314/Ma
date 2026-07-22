@@ -348,7 +348,8 @@
   .bar-track {
     flex: 1;
     min-height: 0;
-    overflow: hidden;
+    overflow-x: visible;
+    overflow-y: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -360,6 +361,7 @@
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
     color: var(--text-faint);
+    white-space: nowrap;
   }
 
   .bar-fill {
@@ -933,9 +935,10 @@
     container.innerHTML = days.map((ts, i) => {
       const h = Math.round((counts[i] / max) * 62) + 4;
       const label = showEveryLabel ? formatWeekday(ts) : (i % 5 === 0 ? formatShortDate(ts) : '');
+      const valueText = showEveryLabel && counts[i] > 0 ? counts[i] : '';
       return `<div class="bar-col">
         <div class="bar-track">
-          <div class="bar-value">${counts[i] > 0 ? counts[i] : ''}</div>
+          <div class="bar-value">${valueText}</div>
           <div class="bar-fill" style="height:${h}px;"></div>
         </div>
         <div class="bar-label">${label}</div>
